@@ -24,7 +24,8 @@ CREATE TABLE IF NOT EXISTS Candidates (
     name VARCHAR(255) NOT NULL,
     photo VARCHAR(255) NOT NULL,   
     PRIMARY KEY (candidate_id),
-    FOREIGN KEY (election_id) REFERENCES Elections(election_id)
+    FOREIGN KEY (election_id) REFERENCES Elections(election_id),
+    FOREIGN KEY (name) REFERENCES Users(username),
 );
 
 CREATE TABLE IF NOT EXISTS Votes (

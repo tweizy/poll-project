@@ -110,6 +110,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             <div class="form-group">
                                 <button type="submit" class="form-control btn btn-primary submit px-3">Register</button>
                             </div>
+                            <?php 
+                            if(!empty($username_error)){
+                                echo '<div class="alert alert-danger">' . $username_error . '</div>';
+                            }
+                            elseif(!empty($password_error)){
+                                echo '<div class="alert alert-danger">' . $password_error . '</div>';
+                            }        
+                            ?>
                             <div class="form-group d-md-flex">
                             </div>
 		                </form>

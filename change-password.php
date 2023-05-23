@@ -6,7 +6,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     exit;
 }
 
-require_once("db-connect.php");
+require_once("dbconnect.php");
 
 $password1 = $password2 = "";
 $password_error = "";
@@ -31,12 +31,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
     if(empty($password_error)){
         if($password1 === $password2){
-            $query = "UPDATE users SET hashed_password = ? WHERE username = ?";
+            $query = "UPDATE Users SET password = ? WHERE username = ?";
             if($stmt = $db-> prepare($query)){
                 $hashed_password = password_hash($password1, PASSWORD_DEFAULT);
                 $stmt-> bind_param("ss", $hashed_password, $_SESSION["username"]);
                 $stmt->execute();
-                header("location: dashboard.php");
+                header("location: admin_dashboard.php");
             }
         }
     }
@@ -55,10 +55,30 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
 	
-	<link rel="stylesheet" href="../Style/style.css">
+	<link rel="stylesheet" href="style.css">
+
+	<style>
+        .buttons{
+            display: flex;
+            flex-direction: row;
+            justify-content: end;
+            margin-top: 20px;
+            margin-right: 20px;
+			margin-bottom: -100px;
+        }
+
+        .buttons > a > button{
+            margin-left: 20px;
+        }
+	</style>
 
 	</head>
 	<body>
+    <div class="buttons">
+        <a href="logout.php"><button type="button" class="btn btn-danger">Logout</button></a>
+        <a href="change-password.php"><button type="button" class="btn btn-success">Change password</button></a>
+    </div>
+
 	<section class="ftco-section">
 		<div class="container">
 			<div class="row justify-content-center">
