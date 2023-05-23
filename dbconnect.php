@@ -14,7 +14,6 @@ if($db-> connect_errno){
     return false;
 }
 else{
-    echo "Database connection successful";
     return $db;
 }
 ?>

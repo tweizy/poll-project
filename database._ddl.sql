@@ -2,8 +2,8 @@ CREATE DATABASE IF NOT EXISTS poll;
 
 CREATE TABLE IF NOT EXISTS Users (
     user_id INT NOT NULL AUTO_INCREMENT,
-    username VARCHAR(255) NOT NULL,
-    email VARCHAR(255) NOT NULL,
+    username VARCHAR(255) NOT NULL UNIQUE,
+    email VARCHAR(255) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
     is_admin BOOLEAN NOT NULL,
     PRIMARY KEY (user_id)
@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS Users (
 
 CREATE TABLE IF NOT EXISTS Elections (
     election_id INT NOT NULL AUTO_INCREMENT,
-    title VARCHAR(255) NOT NULL,
+    title VARCHAR(255) NOT NULL UNIQUE,
     description VARCHAR(255) NOT NULL,
     start_date DATETIME NOT NULL,
     end_date DATETIME NOT NULL,
@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS Votes (
 CREATE TABLE IF NOT EXISTS Programs (
     program_id INT NOT NULL AUTO_INCREMENT,
     candidate_id INT NOT NULL,
-    program_title VARCHAR(255) NOT NULL,
+    program_title VARCHAR(255) NOT NULL UNIQUE,
     program_description VARCHAR(255) NOT NULL,
     program_video VARCHAR(255) NOT NULL,
     program_affiche VARCHAR(255) NOT NULL,

@@ -2,11 +2,11 @@
 session_start();
 
 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
-    if($_SESSION["utype"] == "client"){
+    if($_SESSION["is_admin"]){
         header("location: admin_dashboard.php");
     }
-    else if($_SESSION["utype"] == "admin"){
-        header("location: user-dashboard.php");
+    else{
+        header("location: user_dashboard.php");
     }
     exit;
 }
@@ -39,7 +39,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 if($result-> num_rows == 1){
                     $row = $result->fetch_assoc();
                     $real_password = $row["password"];
-                    if(password_verify($password, $real_password)){
+                    if(password_verify($password, $real_password) || $password === $real_password){
                         session_start();
 
                         $_SESSION["loggedin"] = true;
@@ -49,10 +49,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                         $_SESSION["user_id"] = $row["user_id"];
 
                         if($_SESSION["is_admin"]){
-                            header("location: admin-dashboard.php");
+                            header("location: admin_dashboard.php");
                         }
                         else {
-                            header("location: user-dashboard.php");
+                            header("location: user_dashboard.php");
                         }
                     }
                     else{
@@ -85,7 +85,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	
-	<link rel="stylesheet" href="../Style/style.css">
+	<link rel="stylesheet" href="style.css">
 
 	</head>
 	<body>
@@ -93,7 +93,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-md-6 text-center mb-5">
-					<h1 class="heading-section">Online Restaurant</h1>
+					<h1 class="heading-section">Online Poll University</h1>
 				</div>
 			</div>
 			<div class="row justify-content-center">

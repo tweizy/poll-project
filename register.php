@@ -2,16 +2,16 @@
 session_start();
 
 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
-    if($_SESSION["utype"] == "client"){
-        header("location: ../clientPages/client-dashboard.php");
+    if($_SESSION["is_admin"] == "client"){
+        header("location: client_dashboard.php");
     }
-    else if($_SESSION["utype"] == "admin"){
-        header("location: ../adminPages/admin-dashboard.php");
+    else{
+        header("location: admin_dashboard.php");
     }
     exit;
 }
 
-require_once("db-connect.php");
+require_once("dbconnect.php");
 
 $username = $password = "";
 $username_error = $password_error = "";
@@ -37,11 +37,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     }
 
     if(empty($username_error) && empty($password_error) && empty($email_error)){
-        $query = "INSERT INTO users (username, email, utype, hashed_password) VALUES (?, ?, 'client', ?)";
+        $query = "INSERT INTO Users (username, email, password, is_admin) VALUES (?, ?, ?, false)";
         if($stmt = $db-> prepare($query)){
             $hashed_password = password_hash($password, PASSWORD_DEFAULT);
             $stmt-> bind_param("sss", $username, $email, $hashed_password);
-            $stmt-> execute();
             if($stmt-> execute()){
                 header("location: login.php");
             }
@@ -69,14 +68,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	
-	<link rel="stylesheet" href="../Style/style.css">
+	<link rel="stylesheet" href="style.css">
 	</head>
 	<body>
 	<section class="ftco-section">
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-md-6 text-center mb-5">
-					<h1 class="heading-section">TO DO APP</h1>
+					<h1 class="heading-section">Online Poll University</h1>
 				</div>
 			</div>
 			<div class="row justify-content-center">
