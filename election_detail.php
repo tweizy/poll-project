@@ -39,6 +39,13 @@ $row = $results->fetch_array()
     </style>
 </head>
 <body>
+    <?php
+    if(isset($_GET["msg"])){
+        echo '<div class="alert alert-success" role="alert">
+        '.$_GET["msg"].'
+        </div>';
+    }
+    ?>
     <div class="buttons">
         <a href="logout.php"><button type="button" class="btn btn-danger">Logout</button></a>
         <a href="change-password.php"><button type="button" class="btn btn-success">Change password</button></a>
