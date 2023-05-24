@@ -45,6 +45,11 @@ $row = $results->fetch_array()
         '.$_GET["msg"].'
         </div>';
     }
+    if(isset($_GET["msg_error"])){
+        echo '<div class="alert alert-danger" role="alert">
+        '.$_GET["msg_error"].'
+        </div>';
+    }
     ?>
     <div class="buttons">
         <a href="logout.php"><button type="button" class="btn btn-danger">Logout</button></a>
@@ -58,7 +63,7 @@ $row = $results->fetch_array()
         echo "End date: ". $row["end_date"]."<br>";
         ?>
         <div style="margin-top: 20px">
-            <a href="candidate.php?election_id=<?php echo $_GET["election_id"] ?>"><button type="button" class="btn btn-danger">Candidate</button></a>
+            <a href="add_candidature.php?election_id=<?php echo $_GET["election_id"] ?>"><button type="button" class="btn btn-danger">Candidate</button></a>
             <a href="vote.php?election_id=<?php echo $_GET["election_id"] ?>"><button type="button" class="btn btn-primary">Vote</button></a>
         </div>
     </div>
