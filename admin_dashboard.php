@@ -46,58 +46,40 @@ else{
     <?php
     ?>
 
-    <div class="ag-format-container">
-    <div class="ag-courses_box" style="margin-top: 10%;">
-        <div class="ag-courses_item">
-        <a href="#" class="ag-courses-item_link">
-            <div class="ag-courses-item_bg"></div>
+<div class="ag-format-container">
+    <div class="ag-courses_box" style="margin-top: 5%;">
+        <?php
+        require_once("dbconnect.php");
 
-            <div class="ag-courses-item_title">
-            Election délégué UM6P-CS
-            </div>
-
-            <div class="ag-courses-item_date-box">
-            Start:
-            <span class="ag-courses-item_date">
-                04.11.2022
-            </span>
-            </div>
-        </a>
-        </div>
-
-        <div class="ag-courses_item">
-        <a href="#" class="ag-courses-item_link">
-            <div class="ag-courses-item_bg"></div>
-
-            <div class="ag-courses-item_title">
-            Election Président BDE UM6P-CS
-            </div>
-
-            <div class="ag-courses-item_date-box">
-            Start:
-            <span class="ag-courses-item_date">
-                04.11.2022
-            </span>
-            </div>
-        </a>
-        </div>
-
-        <div class="ag-courses_item">
-        <a href="#" class="ag-courses-item_link">
-            <div class="ag-courses-item_bg"></div>
-
-            <div class="ag-courses-item_title">
-            Election Président BDS UM6P-CS
-            </div>
-
-            <div class="ag-courses-item_date-box">
-            Start:
-            <span class="ag-courses-item_date">
-                04.11.2022
-            </span>
-            </div>
-        </a>
-        </div>
+        $query = "SELECT * FROM Elections WHERE start_date <= NOW() AND end_date > NOW() ORDER BY start_date ASC";
+        $stmt = $db->prepare($query);
+        $stmt->execute();
+        $results = $stmt->get_result();
+        while($row = $results->fetch_array()){
+            echo '<div class="ag-courses_item">
+            <a href="election_detail.php?election_id='.$row["election_id"].'" class="ag-courses-item_link">
+                <div class="ag-courses-item_bg"></div>
+    
+                <div class="ag-courses-item_title">
+                '.$row["title"].'
+                </div>
+    
+                <div class="ag-courses-item_date-box">
+                Start date:
+                <span class="ag-courses-item_date">
+                    '.$row["start_date"].'
+                </span>
+                </div>
+                <div class="ag-courses-item_date-box">
+                End date:
+                <span class="ag-courses-item_date">
+                    '.$row["end_date"].'
+                </span>
+                </div>
+            </a>
+            </div>';
+        }
+        ?>
     </div>
     </div>
 </body>

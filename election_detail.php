@@ -54,6 +54,7 @@ $row = $results->fetch_array()
     <div class="buttons">
         <a href="logout.php"><button type="button" class="btn btn-danger">Logout</button></a>
         <a href="change-password.php"><button type="button" class="btn btn-success">Change password</button></a>
+        <a href="admin_dashboard.php"><button type="button" class="btn btn-primary">Dashboard</button></a>
     </div>
     <div style="display: flex; align-items: center; flex-direction: column; margin-top: 50px">
         <?php

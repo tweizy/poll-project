@@ -61,8 +61,26 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	
 	<link rel="stylesheet" href="style.css">
+    <style>
+        .buttons{
+            display: flex;
+            flex-direction: row;
+            justify-content: end;
+            margin-top: 20px;
+            margin-right: 20px;
+        }
+
+        .buttons > a > button{
+            margin-left: 20px;
+        }
+    </style>
 	</head>
 	<body>
+    <div class="buttons">
+        <a href="logout.php"><button type="button" class="btn btn-danger">Logout</button></a>
+        <a href="change-password.php"><button type="button" class="btn btn-success">Change password</button></a>
+        <a href="admin_dashboard.php"><button type="button" class="btn btn-primary">Dashboard</button></a>
+    </div>
 	<section class="ftco-section">
 		<div class="container">
 			<div class="row justify-content-center">

@@ -63,6 +63,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 	<link rel="stylesheet" href="style.css">
 	</head>
 	<body>
+    <div class="buttons">
+        <a href="logout.php"><button type="button" class="btn btn-danger">Logout</button></a>
+        <a href="change-password.php"><button type="button" class="btn btn-success">Change password</button></a>
+        <a href="admin_dashboard.php"><button type="button" class="btn btn-primary">Dashboard</button></a>
+    </div>
 	<section class="ftco-section">
 		<div class="container">
 			<div class="row justify-content-center">
